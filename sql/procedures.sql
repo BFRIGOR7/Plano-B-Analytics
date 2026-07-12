@@ -18,10 +18,34 @@ BEGIN
     )
     VALUES (
         p_venda_id,
-        p_prodpduto_id,
+        p_produto_id,
         p_quantidade,
         p_preco_unitario
     );
+
+END $$
+
+DELIMITER ;
+
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_registrar_venda(
+    IN p_forma_pagamento VARCHAR(30),
+    IN p_data_venda DATE
+)
+BEGIN
+
+    INSERT INTO vendas (
+        forma_pagamento,
+        data_venda
+    )
+    VALUES (
+        p_forma_pagamento,
+        p_data_venda
+    );
+
+    SELECT LAST_INSERT_ID() AS nova_venda_id;
 
 END $$
 
